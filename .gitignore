@@ -1,0 +1,16 @@
+bin/
+obj/
+
+.idea/
+.vs/
+*.user
+*.suo
+
+riderModule.iml
+_ReSharper.Caches/
+
+uploads/
+
+appsettings.Local.json
+appsettings.*.Local.json
+*.pdf

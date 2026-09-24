@@ -1,0 +1,221 @@
+### Register Candidate
+POST http://localhost:5175/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@hirematch.com",
+  "firstName": "Test",
+  "lastName": "User",
+  "password": "Password123!"
+}
+
+### Register Candidate - Validation Test
+POST http://localhost:5175/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "abc",
+  "firstName": "",
+  "lastName": "",
+  "password": "12"
+}
+
+### Login
+POST http://localhost:5175/api/login
+Content-Type: application/json
+
+{
+  "email": "test@hirematch.com",
+  "password": "Password123!"
+}
+
+### Get Current User - Without Token
+GET http://localhost:5175/api/me
+
+### Get Current User - With Token
+GET http://localhost:5175/api/me
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOGRjYmJjZS0zYWU2LTRhZDUtOTllMS1kMjg5MDAzZTE0OGEiLCJlbWFpbCI6InRlc3RAaGlyZW1hdGNoLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTc5MDE5NDY5MH0.wc5BSLxHIYlGSRl1kvOqiRH4Nvng-lAK0p7_Xq0Y81A
+
+### Candidate Dashboard
+GET http://localhost:5175/api/candidate/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOGRjYmJjZS0zYWU2LTRhZDUtOTllMS1kMjg5MDAzZTE0OGEiLCJlbWFpbCI6InRlc3RAaGlyZW1hdGNoLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTc5MDE5NDY5MH0.wc5BSLxHIYlGSRl1kvOqiRH4Nvng-lAK0p7_Xq0Y81A
+
+### Get Candidate Profile
+GET http://localhost:5175/api/candidate/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOGRjYmJjZS0zYWU2LTRhZDUtOTllMS1kMjg5MDAzZTE0OGEiLCJlbWFpbCI6InRlc3RAaGlyZW1hdGNoLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTc5MDE5NDY5MH0.wc5BSLxHIYlGSRl1kvOqiRH4Nvng-lAK0p7_Xq0Y81A
+
+### Update Candidate Profile
+PUT http://localhost:5175/api/candidate/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOGRjYmJjZS0zYWU2LTRhZDUtOTllMS1kMjg5MDAzZTE0OGEiLCJlbWFpbCI6InRlc3RAaGlyZW1hdGNoLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTc5MDE5NDY5MH0.wc5BSLxHIYlGSRl1kvOqiRH4Nvng-lAK0p7_Xq0Y81A
+Content-Type: application/json
+
+{
+  "headline": "Junior Backend Developer",
+  "bio": "C# ve .NET üzerine çalışan bilgisayar mühendisiyim.",
+  "yearsOfExperience": 1
+}
+
+### Create Resume
+POST http://localhost:5175/api/candidate/resume
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOGRjYmJjZS0zYWU2LTRhZDUtOTllMS1kMjg5MDAzZTE0OGEiLCJlbWFpbCI6InRlc3RAaGlyZW1hdGNoLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTc5MDE5OTQzN30.DQjdHsyp6Edgwf0zWVbvd5dnjp2gBpm70TmpJUuVw14
+Content-Type: application/json
+
+{
+  "fileName": "my-cv.pdf",
+  "fileUrl": "https://example.com/my-cv.pdf"
+}
+
+### Upload Resume
+POST http://localhost:5175/api/candidate/resume/upload
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOGRjYmJjZS0zYWU2LTRhZDUtOTllMS1kMjg5MDAzZTE0OGEiLCJlbWFpbCI6InRlc3RAaGlyZW1hdGNoLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTc5MDE5OTQzN30.DQjdHsyp6Edgwf0zWVbvd5dnjp2gBpm70TmpJUuVw14
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="test-cv.pdf"
+Content-Type: application/pdf
+
+< ./test-cv.pdf
+--WebAppBoundary--
+
+### Upload Resume
+POST http://localhost:5175/api/candidate/resume/upload
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOGRjYmJjZS0zYWU2LTRhZDUtOTllMS1kMjg5MDAzZTE0OGEiLCJlbWFpbCI6InRlc3RAaGlyZW1hdGNoLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTc5MDIwMTk1OX0.JHnZXlsgG5eKp1MyYt30TGx5nFalbvHaaNFqqDh7vmI
+Content-Type: multipart/form-data; boundary=HireMatchBoundary
+
+--HireMatchBoundary
+Content-Disposition: form-data; name="file"; filename="test-cv.pdf"
+Content-Type: application/pdf
+
+< ./test-cv.pdf
+--HireMatchBoundary--
+
+### Create Job Post
+POST http://localhost:5175/api/job
+Authorization: Bearer BURAYA_EMPLOYER_TOKEN
+Content-Type: application/json
+
+{
+  "title": "Junior Backend Developer",
+  "description": "We are looking for a Junior Backend Developer to join our team.",
+  "location": "Istanbul",
+  "jobType": 1,
+  "workMode": 2,
+  "companyId": "BURAYA_COMPANY_ID",
+  "requiredSkills": [
+    "C#",
+    ".NET",
+    "ASP.NET Core",
+    "PostgreSQL",
+    "Docker"
+  ]
+}
+
+### Register Employer
+POST http://localhost:5175/api/auth/register/employer
+Content-Type: application/json
+
+{
+  "email": "employer@hirematch.com",
+  "firstName": "John",
+  "lastName": "Recruiter",
+  "password": "Employer123!"
+}
+
+### Employer Login
+POST http://localhost:5175/api/login
+Content-Type: application/json
+
+{
+  "email": "employer@hirematch.com",
+  "password": "Employer123!"
+}
+
+### Create Company
+POST http://localhost:5175/api/company
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDdjNmE5YS05MTMwLTRjODktOWJkZC02MjU0ZmJmMDM3NzYiLCJlbWFpbCI6ImVtcGxveWVyQGhpcmVtYXRjaC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJFbXBsb3llciIsImV4cCI6MTc5MDI1MDA3MH0.39QYcJ0x9izP8bkMUM1ji7p8b10YjtYqcHfi8RT697Q
+Content-Type: application/json
+
+{
+  "name": "HireMatch Technologies",
+  "description": "AI-powered recruitment company.",
+  "website": "https://hirematch.com",
+  "location": "Istanbul"
+}
+
+### Create Job Post
+POST http://localhost:5175/api/job
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDdjNmE5YS05MTMwLTRjODktOWJkZC02MjU0ZmJmMDM3NzYiLCJlbWFpbCI6ImVtcGxveWVyQGhpcmVtYXRjaC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJFbXBsb3llciIsImV4cCI6MTc5MDI1NDI2OX0.1SNQYLbcOKLUira7rXucwkrYa92_s1FJkAtiNCoW0VM
+Content-Type: application/json
+
+{
+  "title": "Junior Backend Developer",
+  "description": "We are looking for a Junior Backend Developer to join our team.",
+  "location": "Istanbul",
+  "jobType": 1,
+  "workMode": 2,
+  "companyId": "b99449f3-9fc7-4ef3-956c-da93a55afd05",
+  "requiredSkills": [
+    "C#",
+    ".NET",
+    "ASP.NET Core",
+    "PostgreSQL",
+    "Docker"
+  ]
+}
+
+### Match Resume With Job
+GET http://localhost:5175/api/matching/resume/b529af9c-7c85-4310-a810-2d4bee1171a8/job/e2e6df87-d667-4e02-aa6d-c3d89b11333d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOGRjYmJjZS0zYWU2LTRhZDUtOTllMS1kMjg5MDAzZTE0OGEiLCJlbWFpbCI6InRlc3RAaGlyZW1hdGNoLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTc5MDI1MTE0Nn0.Kc4lzc0bCDOQFb1w2ZcMUD7ga6GgG_SQFicyYM3-ar8
+
+### Matching
+GET http://localhost:5175/api/matching/resume/4c12dd4d-5723-4386-bcbc-79b8ec63ac11/job/ae747294-6d55-4d61-b5cb-7b0e24ccbc5c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOGRjYmJjZS0zYWU2LTRhZDUtOTllMS1kMjg5MDAzZTE0OGEiLCJlbWFpbCI6InRlc3RAaGlyZW1hdGNoLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTc5MDI1OTQ5OX0.Rx5WY5g13FcYQeYoYfpYN0wFFke-deo268Tr3fcriB8
+
+### Duplicate Candidate Registration
+POST http://localhost:5175/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@hirematch.com",
+  "firstName": "Test",
+  "lastName": "User",
+  "password": "Password123!"
+}
+
+### Second Employer
+POST http://localhost:5175/api/auth/register/employer
+Content-Type: application/json
+
+{
+  "email": "employer2@hirematch.com",
+  "firstName": "Second",
+  "lastName": "Employer",
+  "password": "Employer123!"
+}
+
+### Second Employer Login
+POST http://localhost:5175/api/login
+Content-Type: application/json
+
+{
+  "email": "employer2@hirematch.com",
+  "password": "Employer123!"
+}
+
+### Unauthorized Company Access Test
+POST http://localhost:5175/api/job
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNTBkNDY0NC1mNjMwLTRjNDAtODA4ZS1lOTM3MmY3OTdmYzUiLCJlbWFpbCI6ImVtcGxveWVyMkBoaXJlbWF0Y2guY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiRW1wbG95ZXIiLCJleHAiOjE3OTAyNjA3MTV9.BI0qiFq3Ypv1ZxJqKmb4cSZCbVyZJNtFFNQXp1zNWIw
+Content-Type: application/json
+
+{
+  "title": "Unauthorized Test Job",
+  "description": "This should not be created.",
+  "location": "Istanbul",
+  "jobType": 1,
+  "workMode": 2,
+  "companyId": "b99449f3-9fc7-4ef3-956c-da93a55afd05",
+  "requiredSkills": [
+    "C#",
+    ".NET"
+  ]
+}

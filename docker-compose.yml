@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: hirematch-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: hirematch
+      POSTGRES_USER: hirematch
+      POSTGRES_PASSWORD: hirematch_dev_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - hirematch_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  hirematch_postgres_data:

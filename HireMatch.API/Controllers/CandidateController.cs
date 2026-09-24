@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using HireMatch.Application.Abstractions.Services;
+using HireMatch.Application.Commands.Job;
 using HireMatch.Application.DTOs.Candidate;
 using HireMatch.Application.Handlers;
 using Microsoft.AspNetCore.Authorization;
@@ -14,25 +15,32 @@ public class CandidateController : ControllerBase
 {
     private readonly GetCandidateProfileHandler _getCandidateProfileHandler;
     private readonly UpdateCandidateProfileHandler _updateCandidateProfileHandler;
+    private readonly GetMyJobApplicationsHandler _getMyJobApplicationsHandler;
     private readonly CreateResumeHandler _createResumeHandler;
     private readonly IFileStorageService _fileStorageService;
     private readonly IResumeTextExtractor _resumeTextExtractor;
     private readonly ExtractResumeSkillsHandler _extractResumeSkillsHandler;
+    private readonly ApplyToJobHandler _applyToJobHandler;
+    
 
     public CandidateController(
         GetCandidateProfileHandler getCandidateProfileHandler,
         UpdateCandidateProfileHandler updateCandidateProfileHandler,
+        GetMyJobApplicationsHandler getMyJobApplicationsHandler,
         CreateResumeHandler createResumeHandler,
         IFileStorageService fileStorageService,
         IResumeTextExtractor resumeTextExtractor,
-        ExtractResumeSkillsHandler extractResumeSkillsHandler)
+        ExtractResumeSkillsHandler extractResumeSkillsHandler,
+        ApplyToJobHandler applyToJobHandler)
     {
         _getCandidateProfileHandler = getCandidateProfileHandler;
         _updateCandidateProfileHandler = updateCandidateProfileHandler;
+        _getMyJobApplicationsHandler = getMyJobApplicationsHandler;
         _createResumeHandler = createResumeHandler;
         _fileStorageService = fileStorageService;
         _resumeTextExtractor = resumeTextExtractor;
         _extractResumeSkillsHandler = extractResumeSkillsHandler;
+        _applyToJobHandler = applyToJobHandler;
     }
 
     [HttpGet("profile")]
@@ -86,6 +94,26 @@ public class CandidateController : ControllerBase
             cancellationToken);
 
         return NoContent();
+    }
+    
+    [HttpGet("applications")]
+    public async Task<IActionResult> GetMyApplications(
+        CancellationToken cancellationToken)
+    {
+        var userId = User.FindFirstValue(
+            ClaimTypes.NameIdentifier);
+
+        if (userId is null)
+        {
+            return Unauthorized();
+        }
+
+        var applications =
+            await _getMyJobApplicationsHandler.Handle(
+                Guid.Parse(userId),
+                cancellationToken);
+
+        return Ok(applications);
     }
 
     [HttpPost("resume")]
@@ -191,6 +219,30 @@ public class CandidateController : ControllerBase
             ResumeId = resumeId,
             FileUrl = fileUrl,
             ExtractedText = extractedText
+        });
+    }
+    
+    [HttpPost("jobs/{jobPostId:guid}/apply")]
+    public async Task<IActionResult> ApplyToJob(
+        Guid jobPostId,
+        CancellationToken cancellationToken)
+    {
+        var userId = User.FindFirstValue(
+            ClaimTypes.NameIdentifier);
+
+        if (userId is null)
+        {
+            return Unauthorized();
+        }
+
+        var applicationId = await _applyToJobHandler.Handle(
+            Guid.Parse(userId),
+            new ApplyToJobCommand(jobPostId),
+            cancellationToken);
+
+        return Ok(new
+        {
+            ApplicationId = applicationId
         });
     }
 }

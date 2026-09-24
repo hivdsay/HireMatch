@@ -21,6 +21,7 @@ public class AppDbContext : DbContext
     public DbSet<ResumeSkill> ResumeSkills => Set<ResumeSkill>();
     public DbSet<Education> Educations => Set<Education>();
     public DbSet<WorkExperience> WorkExperiences => Set<WorkExperience>();
+    public DbSet<JobApplication> JobApplications => Set<JobApplication>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

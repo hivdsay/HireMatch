@@ -38,6 +38,10 @@ builder.Services.AddScoped<IJobPostRepository, JobPostRepository>();
 builder.Services.AddScoped<IJobSkillRepository, JobSkillRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 
+builder.Services.AddScoped<
+    IJobApplicationRepository,
+    JobApplicationRepository>();
+
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
@@ -56,6 +60,10 @@ builder.Services.AddScoped<RegisterEmployerHandler>();
 builder.Services.AddScoped<CreateCompanyHandler>();
 builder.Services.AddScoped<GetJobPostsHandler>();
 builder.Services.AddScoped<GetJobPostByIdHandler>();
+builder.Services.AddScoped<ApplyToJobHandler>();
+builder.Services.AddScoped<GetJobApplicationsHandler>();
+builder.Services.AddScoped<UpdateJobApplicationStatusHandler>();
+builder.Services.AddScoped<GetMyJobApplicationsHandler>();
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -13,11 +13,43 @@ namespace HireMatch.API.Controllers;
 public class JobController : ControllerBase
 {
     private readonly CreateJobPostHandler _createJobPostHandler;
+    private readonly GetJobPostsHandler _getJobPostsHandler;
+    private readonly GetJobPostByIdHandler _getJobPostByIdHandler;
 
     public JobController(
-        CreateJobPostHandler createJobPostHandler)
+        CreateJobPostHandler createJobPostHandler,
+        GetJobPostsHandler getJobPostsHandler,
+        GetJobPostByIdHandler getJobPostByIdHandler)
     {
         _createJobPostHandler = createJobPostHandler;
+        _getJobPostsHandler = getJobPostsHandler;
+        _getJobPostByIdHandler = getJobPostByIdHandler;
+    }
+    
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetJobPosts(
+        [FromQuery] JobPostFilterRequest filter,
+        CancellationToken cancellationToken)
+    {
+        var jobPosts = await _getJobPostsHandler.Handle(
+            filter,
+            cancellationToken);
+
+        return Ok(jobPosts);
+    }
+    
+    [HttpGet("{jobPostId:guid}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetJobPostById(
+        Guid jobPostId,
+        CancellationToken cancellationToken)
+    {
+        var jobPost = await _getJobPostByIdHandler.Handle(
+            jobPostId,
+            cancellationToken);
+
+        return Ok(jobPost);
     }
 
     [HttpPost]

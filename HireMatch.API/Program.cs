@@ -54,6 +54,8 @@ builder.Services.AddScoped<ExtractResumeSkillsHandler>();
 builder.Services.AddScoped<CreateJobPostHandler>();
 builder.Services.AddScoped<RegisterEmployerHandler>();
 builder.Services.AddScoped<CreateCompanyHandler>();
+builder.Services.AddScoped<GetJobPostsHandler>();
+builder.Services.AddScoped<GetJobPostByIdHandler>();
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

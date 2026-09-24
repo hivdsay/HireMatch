@@ -219,3 +219,27 @@ Content-Type: application/json
     ".NET"
   ]
 }
+
+### Get All Job Posts
+GET http://localhost:5175/api/job
+
+### Get Job By Id
+GET http://localhost:5175/api/job/ae747294-6d55-4d61-b5cb-7b0e24ccbc5c
+
+### Get All Job Posts
+GET http://localhost:5175/api/job
+
+### Search Backend Jobs
+GET http://localhost:5175/api/job?search=backend
+
+### Filter Jobs By Location
+GET http://localhost:5175/api/job?location=Istanbul
+
+### Filter Hybrid Jobs
+GET http://localhost:5175/api/job?workMode=2
+
+### Filter FullTime Jobs
+GET http://localhost:5175/api/job?jobType=1
+
+### Combined Job Filters
+GET http://localhost:5175/api/job?search=backend&location=Istanbul&workMode=2&jobType=1

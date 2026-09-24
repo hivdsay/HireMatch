@@ -1,3 +1,4 @@
+using HireMatch.Application.DTOs.Job;
 using HireMatch.Domain.Entities;
 
 namespace HireMatch.Application.Abstractions.Persistence;
@@ -6,6 +7,13 @@ public interface IJobPostRepository
 {
     Task<JobPost?> GetByIdAsync(
         Guid jobPostId,
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<JobPost>> GetAllAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyCollection<JobPost>> GetFilteredAsync(
+        JobPostFilterRequest filter,
         CancellationToken cancellationToken = default);
 
     Task AddAsync(
